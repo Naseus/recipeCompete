@@ -1,5 +1,11 @@
 SHELL:=/bin/bash
 
+ifdef CI
+TRUNK=./trunk
+else
+TRUNK=trunk
+endif
+
 TAILWIND_FLAGS=-c ./tailwind.config.js -o ./tailwind.css
 TAILWIND_DEV_FLAGS=--watch
 TAILWIND_PROD_FLAGS=--minify
@@ -28,12 +34,12 @@ develop: setup
 	# errors nicely if it's missing, so we will just use it here
 	concurrently \
 		"tailwindcss $(TAILWIND_FLAGS) $(TAILWIND_DEV_FLAGS)" \
-		"trunk serve"
+		"$(TRUNK) serve"
 
 
 .PHONY: clean
 clean:
-	trunk clean
+	$(TRUNK) clean
 	cargo clean
 	rm -rf tailwind.css
 
@@ -41,7 +47,7 @@ clean:
 .PHONY: build
 build: setup clean
 	tailwindcss $(TAILWIND_FLAGS) $(TAILWIND_PROD_FLAGS)
-	trunk build --release
+	$(TRUNK) build --release
 	docker buildx build --platform linux/amd64 --push -t $(CONTAINER) .
 
 
