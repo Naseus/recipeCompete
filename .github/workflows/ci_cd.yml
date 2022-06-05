@@ -11,6 +11,9 @@ jobs:
     environment: Kubernetes
     steps:
 
+      - name: global npm dependencies
+        run: npm install --global concurrently@7 tailwindcss@3
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
