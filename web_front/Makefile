@@ -29,6 +29,8 @@ setup:
 ifdef CI
 	# download a trunk binary to the current working directory
 	wget -qO- https://github.com/thedodd/trunk/releases/download/v0.15.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
+	rustup target add wasm32-unknown-unknown
+	cargo install wasm-bindgen-cli
 endif
 
 
