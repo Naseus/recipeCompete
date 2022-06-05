@@ -45,7 +45,6 @@ impl Component for Model {
                 >{ "+1" }</button>
                 <p class="text-xl serif">{ "Current Count: " }{ self.value }</p>
                 <FunctionComponent />
-                <h1>{ "confirm it works like this" }</h1>
             </div>
         }
     }
